@@ -1,0 +1,19 @@
+{
+  "name": "lapalabs/media-bundle",
+  "description": "The Symfony Media Bundle",
+  "keywords": ["lapalabs", "media", "image", "bundle"],
+  "homepage": "https://github.com/LapaLabs/MediaBundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "LapaLabs",
+      "email": "mail@brainforce.kiev.ua"
+    }
+  ],
+  "require": {
+    "symfony/framework-bundle": "~2.0"
+  },
+  "autoload": {
+    "psr-4": {"LapaLabs\\MediaBundle\\": ""}
+  }
+}
