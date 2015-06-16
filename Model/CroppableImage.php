@@ -2,6 +2,8 @@
 
 namespace LapaLabs\MediaBundle\Model;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Class CroppableImage
  */
@@ -25,6 +27,7 @@ trait CroppableImage
      * @var int
      *
      * @ORM\Column(type="integer")
+     * @Assert\GreaterThan(value="0")
      */
     protected $resultWidth = 0;
 
@@ -32,8 +35,23 @@ trait CroppableImage
      * @var int
      *
      * @ORM\Column(type="integer")
+     * @Assert\GreaterThan(value="0")
      */
     protected $resultHeight = 0;
+
+    /**
+     * Returns an array of data for cropping with crop filter provided with LiipImagineBundle
+     * @link http://symfony.com/doc/master/bundles/LiipImagineBundle/filters.html#the-crop-filter
+     *
+     * @return array
+     */
+    public function getCropData()
+    {
+        return [
+            'start' => [$this->offsetX, $this->offsetY],
+            'size' => [$this->resultWidth, $this->resultHeight],
+        ];
+    }
 
     /**
      * Set offsetX
@@ -91,9 +109,10 @@ trait CroppableImage
     {
         $this->resultWidth = (int)$resultWidth;
 
-        if (0 >= $this->resultWidth) {
-            throw new \InvalidArgumentException('The result image width should be greater then 0.');
-        }
+        // Used form validator constraints instead
+//        if (0 >= $this->resultWidth) {
+//            throw new \InvalidArgumentException('The result image width should be greater then 0.');
+//        }
 
         return $this;
     }
@@ -118,9 +137,10 @@ trait CroppableImage
     {
         $this->resultHeight = (int)$resultHeight;
 
-        if (0 >= $this->resultHeight) {
-            throw new \InvalidArgumentException('The result image height should be greater then 0.');
-        }
+        // Used form validator constraints instead
+//        if (0 >= $this->resultHeight) {
+//            throw new \InvalidArgumentException('The result image height should be greater then 0.');
+//        }
 
         return $this;
     }
