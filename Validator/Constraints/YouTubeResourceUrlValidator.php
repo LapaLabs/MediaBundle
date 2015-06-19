@@ -4,6 +4,7 @@ namespace LapaLabs\MediaBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\UrlValidator;
+use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 /**
  * Class YouTubeResourceUrlValidator
@@ -17,8 +18,24 @@ class YouTubeResourceUrlValidator extends UrlValidator
      */
     public function validate($value, Constraint $constraint)
     {
-        $parsedUrl = parse_url($value);
+        if (!$constraint instanceof YouTubeResourceUrl) {
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\YouTubeResourceUrl');
+        }
 
+        if (null === $value) {
+            return;
+        }
+
+        if (!is_scalar($value) && !(is_object($value) && method_exists($value, '__toString'))) {
+            throw new UnexpectedTypeException($value, 'string');
+        }
+
+        $value = (string) $value;
+        if ('' === $value) {
+            return;
+        }
+
+        $parsedUrl = parse_url($value);
         if (isset($parsedUrl['host'])) {
             parent::validate($value, $constraint);
 
