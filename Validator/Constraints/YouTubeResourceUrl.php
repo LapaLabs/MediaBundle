@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraints\Url;
  * @Annotation
  *
  * @author Victor Bocharsky <bocharsky.bw@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php The MIT License
  */
 class YouTubeResourceUrl extends Url
 {

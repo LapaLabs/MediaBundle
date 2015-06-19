@@ -6,6 +6,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class CroppableImage
+ *
+ * @author Victor Bocharsky <bocharsky.bw@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php The MIT License
  */
 trait CroppableImage
 {

@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
  * Class YouTubeResourceUrlValidator
  *
  * @author Victor Bocharsky <bocharsky.bw@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php The MIT License
  */
 class YouTubeResourceUrlValidator extends UrlValidator
 {
