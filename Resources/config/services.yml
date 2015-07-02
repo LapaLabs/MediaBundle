@@ -1,0 +1,4 @@
+services:
+    lapalabs_media.extractor.youtube:
+        class: LapaLabs\MediaBundle\Extractor\YoutubeExtractor
+        arguments: []

@@ -45,15 +45,23 @@ class YouTubeResourceUrlValidator extends UrlValidator
                 case 'm.youtube.com':
                 case 'www.youtube.com':
                     // https://www.youtube.com/watch?v=YKwDcLUXlvU
+                    // https://www.youtube.com/embed/Mmh-ew1swD4
 
-                    if (false
-                        or false === isset($parsedUrl['query'])
-                        or false === isset($parsedUrl['path'])
-                        or 0 !== strcmp('/watch', $parsedUrl['path'])
-                        or parse_str($parsedUrl['query'], $output)
-                        or false === isset($output['v'])
-                        or 11 !== strlen($output['v'])
+                    if (true
+                        and true === isset($parsedUrl['path'])
+                        and true === isset($parsedUrl['query'])
+                        and 0 === strcmp('/watch', $parsedUrl['path'])
+                        and null == parse_str($parsedUrl['query'], $output)
+                        and true === isset($output['v'])
+                        and 11 === strlen($output['v'])
                     ) {
+                        ;
+                    } elseif (true
+                        and true === isset($parsedUrl['path'])
+                        and 1 === preg_match('@^/embed/(?<v>[\w-]{11})($|/|#|\?)@', $parsedUrl['path'], $matches)
+                    ) {
+                        ;
+                    } else {
                         $this->context->buildViolation($constraint->hostMessage)
                             ->setParameter('%host%', $this->formatValue($parsedUrl['host']))
                             ->addViolation();
@@ -63,10 +71,12 @@ class YouTubeResourceUrlValidator extends UrlValidator
                 case 'youtu.be':
                     // https://youtu.be/YKwDcLUXlvU
 
-                    if (false
-                        or false === isset($parsedUrl['path'])
-                        or 1 !== preg_match('@^/[\w-]{11}($|/|#|\?)@', $parsedUrl['path'])
+                    if (true
+                        and true === isset($parsedUrl['path'])
+                        and 1 === preg_match('@^/(?<v>[\w-]{11})($|/|#|\?)@', $parsedUrl['path'], $matches)
                     ) {
+                        ;
+                    } else {
                         $this->context->buildViolation($constraint->hostMessage)
                             ->setParameter('%host%', $this->formatValue($parsedUrl['host']))
                             ->addViolation();
